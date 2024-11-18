@@ -129,6 +129,7 @@ DELETE /api/projects/{project_id}/tasks/{task_id}
 ## Response Formats
 
 ### Success Response
+
 ```json
 {
   "status": "success",
@@ -140,6 +141,7 @@ DELETE /api/projects/{project_id}/tasks/{task_id}
 ```
 
 ### Error Response
+
 ```json
 {
   "status": "error",
@@ -153,6 +155,7 @@ DELETE /api/projects/{project_id}/tasks/{task_id}
 ## Database Models
 
 ### Project Model
+
 ```
 - id: PRIMARY KEY
 - name: STRING (required)
@@ -163,6 +166,7 @@ DELETE /api/projects/{project_id}/tasks/{task_id}
 ```
 
 ### Task Model
+
 ```
 - id: PRIMARY KEY
 - project_id: FOREIGN KEY (references Projects)
@@ -176,6 +180,7 @@ DELETE /api/projects/{project_id}/tasks/{task_id}
 ```
 
 ### User Model
+
 ```
 - id: PRIMARY KEY
 - username: STRING (required)
@@ -188,6 +193,7 @@ DELETE /api/projects/{project_id}/tasks/{task_id}
 ## Storage Implementation
 
 ### Advanced Mode (Database)
+
 - MongoDB database
 - Tables:
   - users
