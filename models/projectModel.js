@@ -20,6 +20,13 @@ const projectSchema = new mongoose.Schema({
   },
 });
 
+//virtual field to get tasks
+projectSchema.virtual('tasks', {
+  ref: 'Task',            // References the Task model
+  localField: '_id',      // Uses Project's _id field
+  foreignField: 'project_id'  // Matches with Task's project_id field
+});
+
 projectSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
