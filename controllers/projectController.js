@@ -2,6 +2,7 @@ const Project = require("../models/projectModel");
 const catchAsync = require("../utils/catchAsync");
 const handleResponse = require("../utils/handleResponse");
 const AppError = require("../utils/appError");
+const Task = require("../models/taskModel");
 
 ////////////////////
 //Get All Projects
@@ -61,7 +62,10 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
   const project = await Project.findByIdAndDelete(req.params.id);
 
   if (!project) {
-    return next(new AppError("No tour found with that ID", 404));
+    return next(new AppError("No project found with that ID", 404));
   }
+
+  await Task.deleteMany({ project_id: req.params.id });
+
   handleResponse(res, 204, "Project deleted successfully");
 });
