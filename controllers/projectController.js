@@ -11,8 +11,7 @@ exports.getAllProjects = catchAsync(async (req, res, next) => {
   const projects = await Project.find()
     .populate({
       path: "tasks",
-      select:
-        "title description due_date priority status created_at updated_at",
+      select: "task_name created_at updated_at",
       // You can remove fields you don't want to send in the response
     })
     .exec();
@@ -37,8 +36,7 @@ exports.getProject = catchAsync(async (req, res, next) => {
   const project = await Project.findById(req.params.id)
     .populate({
       path: "tasks",
-      select:
-        "title description due_date priority status created_at updated_at",
+      select: "task_name created_at updated_at",
       // You can remove fields you don't want to send in the response
     })
     .exec();
