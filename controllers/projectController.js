@@ -8,7 +8,14 @@ const Task = require("../models/taskModel");
 //Get All Projects
 //////////////////
 exports.getAllProjects = catchAsync(async (req, res, next) => {
-  const projects = await Project.find();
+  const projects = await Project.find()
+    .populate({
+      path: "tasks",
+      select:
+        "title description due_date priority status created_at updated_at",
+      // You can remove fields you don't want to send in the response
+    })
+    .exec();
 
   handleResponse(res, 200, "Projects fetched successfully", projects);
 });
@@ -27,8 +34,14 @@ exports.createProject = catchAsync(async (req, res, next) => {
 //Get Project
 //////////////////
 exports.getProject = catchAsync(async (req, res, next) => {
-  const project = await Project.findById(req.params.id);
-  console.log(project);
+  const project = await Project.findById(req.params.id)
+    .populate({
+      path: "tasks",
+      select:
+        "title description due_date priority status created_at updated_at",
+      // You can remove fields you don't want to send in the response
+    })
+    .exec();
   if (!project) {
     console.log(next());
     return next(new AppError("No projects found with that ID", 404)); // jump striaght to error middleware if tour = null
